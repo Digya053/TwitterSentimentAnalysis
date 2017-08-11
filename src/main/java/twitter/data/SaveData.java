@@ -8,16 +8,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import twitter.service.TwitterService;
+import twitter.service.fetch.TwitterData;
 
 @Service
-public class TwitterData {
+public class SaveData {
 
 	@Autowired
-	TwitterService twitterService;
+	TwitterData twitterData;
 
 	public void writeDataToFile(){
-		List<String> tweets = this.twitterService.fetchTweets();
+		List<String> tweets = this.twitterData.fetchTweets();
 
 		BufferedWriter output = null;
 

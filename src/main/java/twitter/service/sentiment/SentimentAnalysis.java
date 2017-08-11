@@ -1,4 +1,4 @@
-package twitter.sentiment;
+package twitter.service.sentiment;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import twitter.data.TwitterData;
-import twitter.service.TwitterService;
-import twitter.trainingdata.TrainingData;
+import twitter.data.TrainingData;
+import twitter.service.fetch.TwitterData;
 
 @Service
 public class SentimentAnalysis {
@@ -21,14 +20,11 @@ public class SentimentAnalysis {
 	TwitterData twitterData;
 
 	@Autowired
-	TwitterService twitterService;
-
-	@Autowired
 	TrainingData trainingData;
 
 
 	public List<String> getTweets(){
-		List<String> tweets = this.twitterService.fetchTweets();
+		List<String> tweets = this.twitterData.fetchTweets();
 		return tweets;
 	}
 
@@ -47,7 +43,6 @@ public class SentimentAnalysis {
 	public Map<String, Sentiment> checkTweets(){
 		List<String> tweets = this.getTweets();
 		Map<String, Sentiment> sentimentAnalysis = new HashMap<String, Sentiment>();
-		logger.info("Analysing sentiment of each tweet...");
 		for(String tweet : tweets){
 			Sentiment sentiment = this.assignSentiment(tweet);
 			sentimentAnalysis.put(tweet, sentiment);

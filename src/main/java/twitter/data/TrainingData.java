@@ -1,4 +1,4 @@
-package twitter.trainingdata;
+package twitter.data;
 
 import java.util.ArrayList;
 import java.util.List;

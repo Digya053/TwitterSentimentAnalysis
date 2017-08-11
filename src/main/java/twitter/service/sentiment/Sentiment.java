@@ -1,4 +1,4 @@
-package twitter.sentiment;
+package twitter.service.sentiment;
 
 public enum Sentiment {
 

@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import twitter.data.TwitterData;
-import twitter.sentiment.Sentiment;
-import twitter.sentiment.SentimentAnalysis;
-import twitter.service.TwitterService;
+import twitter.data.SaveData;
+import twitter.service.sentiment.Sentiment;
+import twitter.service.sentiment.SentimentAnalysis;
+import twitter.service.fetch.TwitterData;
 
 @RestController
 public class TwitterDataAnalysisController {
@@ -23,10 +23,10 @@ public class TwitterDataAnalysisController {
 	private static final Logger logger = LoggerFactory.getLogger(TwitterDataAnalysisController.class);
 
 	@Autowired
-	TwitterService twitterService;
+	TwitterData twitterData;
 
 	@Autowired
-	TwitterData twitterData;
+	SaveData saveData;
 
 	@Autowired
 	SentimentAnalysis sentimentAnalysis;
@@ -34,14 +34,14 @@ public class TwitterDataAnalysisController {
 	@RequestMapping(value = "/fetchTweets", method = RequestMethod.GET)
 	public ResponseEntity<?> fetchTweets(){
 		logger.info("Fetching all tweets...");
-		List<String> tweets = this.twitterService.fetchTweets();
+		List<String> tweets = this.twitterData.fetchTweets();
 		return new ResponseEntity<List<String>>(tweets, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/saveTweetsToFile", method = RequestMethod.GET)
 	public ResponseEntity<?> writeTweetsToFile(){
 		logger.info("Saving all tweets to file...");
-		this.twitterData.writeDataToFile();
+		this.saveData.writeDataToFile();
 		return new ResponseEntity<String>("Tweets saved to file", HttpStatus.OK);
 	}
 
