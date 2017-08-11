@@ -1,0 +1,11 @@
+build/
+bin/
+lib/
+.settings/
+.classpath
+.gradle/
+.project
+.settings/
+test-output/
+src/main/resources/application.properties
+.gradle/3.3/taskArtifacts/
