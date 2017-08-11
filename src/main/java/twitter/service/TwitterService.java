@@ -22,21 +22,6 @@ public class TwitterService {
 	@Autowired
 	TwitterConfiguration twitterConfiguration;
 
-	public Status updateStatus(String latestStatus){
-		Status status = null;
-		try 
-		{
-			Twitter twitter = this.twitterConfiguration.twitter();
-			status = twitter.updateStatus(latestStatus);
-
-			System.out.println("Successfully updated the status to [" + status.getText() + "].");
-
-		}catch (TwitterException e) {
-			e.printStackTrace();
-		}
-		return status;
-	}
-
 	public List<String> fetchTweets(){
 		Twitter twitter = this.twitterConfiguration.twitter();
 		List<Status> statuses = null;
@@ -46,16 +31,12 @@ public class TwitterService {
 		} catch (TwitterException e) {
 			e.printStackTrace();
 		}
-		logger.info("Showing home timeline.");
+		logger.info("Showing home timeline....");
 		for (Status status : statuses) {
-			logger.info(status.getUser().getName() + ":" +
-					status.getText());
 			tweets.add(status.getUser().getName() + " : " +
 					status.getText());
 		}
 		return tweets;
 	}
-	
-	
 
 }

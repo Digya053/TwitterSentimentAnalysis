@@ -1,10 +1,8 @@
 package twitter.sentiment;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +27,7 @@ public class SentimentAnalysis {
 	TrainingData trainingData;
 
 
-	public List<String> getText(){
+	public List<String> getTweets(){
 		List<String> tweets = this.twitterService.fetchTweets();
 		return tweets;
 	}
@@ -46,12 +44,14 @@ public class SentimentAnalysis {
 		return Sentiment.NEUTRAL;
 	}
 
-	public void checkText(){
-		List<String> tweets = this.getText();
+	public Map<String, Sentiment> checkTweets(){
+		List<String> tweets = this.getTweets();
+		Map<String, Sentiment> sentimentAnalysis = new HashMap<String, Sentiment>();
 		logger.info("Analysing sentiment of each tweet...");
 		for(String tweet : tweets){
 			Sentiment sentiment = this.assignSentiment(tweet);
-			System.out.println(tweet + "  " + sentiment);
+			sentimentAnalysis.put(tweet, sentiment);
 		}
+		return sentimentAnalysis;
 	}
 }

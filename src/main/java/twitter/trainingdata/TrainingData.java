@@ -15,10 +15,12 @@ public class TrainingData {
 		positiveValues.add(":)");
 		positiveValues.add(":D");
 		positiveValues.add("positive");
-		
+		positiveValues.add("love");
+		positiveValues.add("pray");
+
 		return positiveValues;
 	}
-	
+
 	public List<String> negative(){
 		List<String> negativeValues = new ArrayList<>();
 		negativeValues.add("hard");
@@ -26,7 +28,9 @@ public class TrainingData {
 		negativeValues.add("bad");
 		negativeValues.add("sad");
 		negativeValues.add("negative");
-		
+		negativeValues.add(":(");
+		negativeValues.add(":'(");
+
 		return negativeValues;
 	}
 
